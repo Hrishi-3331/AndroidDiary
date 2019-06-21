@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Diary</string>
+    <string name="welcome_user">Welcome User</string>
+    <string name="cleartext"><![CDATA[<<]]></string>
+</resources>
