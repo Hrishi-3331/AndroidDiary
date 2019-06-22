@@ -2,4 +2,7 @@
     <string name="app_name">Diary</string>
     <string name="welcome_user">Welcome User</string>
     <string name="cleartext"><![CDATA[<<]]></string>
+    <string name="welcome">Welcome,</string>
+    <string name="greet">What\'s in your mind today?</string>
+    <string name="lorel_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
 </resources>

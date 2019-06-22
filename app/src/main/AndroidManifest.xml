@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".Lock" />
         <activity android:name=".Home" />
-        <activity android:name=".SetPassword"></activity>
+        <activity android:name=".SetPassword" />
+        <activity android:name=".New_Event"></activity>
     </application>
 
 </manifest>
