@@ -5,4 +5,5 @@
     <string name="welcome">Welcome,</string>
     <string name="greet">What\'s in your mind today?</string>
     <string name="lorel_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="new_post">NEW POST</string>
 </resources>

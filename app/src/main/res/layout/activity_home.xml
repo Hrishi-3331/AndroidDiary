@@ -148,7 +148,10 @@
         android:clickable="true"
         android:focusable="true"
         app:fabCustomSize="60dp"
-        app:srcCompat="@drawable/icons8_write" />
+        app:fabSize="mini"
+        app:srcCompat="@drawable/icons8_write"
+        android:onClick="NewPost"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
