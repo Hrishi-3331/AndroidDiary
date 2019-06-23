@@ -1,5 +1,7 @@
 package com.hrishi_3331.devstudio3331.diary;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -18,6 +21,9 @@ public class New_Event extends AppCompatActivity {
     private EditText title;
     private EditText content;
     private TextView day_date, month_date, day_of_week_date, time;
+    private DatabaseHelper mDatabaseHelper;
+    private String mDate;
+    private String time_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +45,23 @@ public class New_Event extends AppCompatActivity {
         SimpleDateFormat month_date = new SimpleDateFormat("MMMM", Locale.getDefault());
         SimpleDateFormat year_date = new SimpleDateFormat("yyyy", Locale.getDefault());
         SimpleDateFormat day_of_week = new SimpleDateFormat("EEEE", Locale.getDefault());
-        String mDate = format.format(date);
+        mDate = format.format(date);
+        time_ = new SimpleDateFormat("h:mm:ss").format(date);
 
         this.day_date.setText(day_date.format(date));
         this.month_date.setText(month_date.format(date) + " " + year_date.format(date));
         this.day_of_week_date.setText(day_of_week.format(date));
         this.time.setText(time_date.format(date));
+
+        mDatabaseHelper = new DatabaseHelper(New_Event.this);
+    }
+
+
+    public String generateFilename(String title, String date, String time){
+        String[] temps = date.split("/");
+        String[] temps2 = time.split(":");
+        String file = title + temps[0] + temps[1] + temps[2] + temps2[0] + temps2[1] + temps2[2];
+        return file + ".txt";
     }
 
     public void SaveFile(View view){
@@ -58,15 +75,59 @@ public class New_Event extends AppCompatActivity {
             Toast.makeText(this, "No content written to save", Toast.LENGTH_SHORT).show();
         }
         else {
-            String FileName = Event_Title + ".txt";
+            String FileName = generateFilename(Event_Title, mDate, time_);
             try {
                 FileOutputStream outputStream = openFileOutput(FileName, MODE_PRIVATE);
-                outputStream.write(Event_Content.getBytes());
+                OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+                writer.write(Event_Content);
+                writer.close();
                 outputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();
+                Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            boolean res = mDatabaseHelper.AddData(Event_Title, FileName, mDate);
+
+            if (!res){
+                Toast.makeText(this, "Error in saving file! Please try again", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                finish();
             }
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        goBack();
+    }
+
+    public void back(View view){
+        goBack();
+    }
+
+    public void goBack(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(New_Event.this);
+        builder.setMessage("Do you want to quit without saving?")
+                .setTitle("Are you Sure?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(true);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

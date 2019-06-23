@@ -154,6 +154,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="5dp"
             android:background="@android:color/transparent"
+            android:onClick="back"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_arrow_left_black_18dp" />
 
@@ -163,6 +164,7 @@
             android:layout_weight="1"/>
 
         <Button
+            android:onClick="SaveFile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
