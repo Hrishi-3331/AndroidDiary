@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -49,5 +50,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
         return database.rawQuery(query, null);
+    }
+
+    public void deleteEvent(String filename, String date){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TABLE_NAME, "Filename=?", new String[]{filename});
     }
 }

@@ -6,4 +6,6 @@
     <string name="greet">What\'s in your mind today?</string>
     <string name="lorel_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
     <string name="new_post">NEW POST</string>
+    <string name="edit">Edit</string>
+    <string name="textmark"><i>Shared via Diary App. Download it from here: https://play.google.com/store/apps/details?id=com.hrishi_3331.devstudio3331.diary</i></string>
 </resources>

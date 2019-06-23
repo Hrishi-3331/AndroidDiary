@@ -105,6 +105,7 @@ public class Home extends AppCompatActivity {
             public void onBindViewHolder(@NonNull EventsViewHolder eventsViewHolder, int i) {
                 Event event = Events.get(i);
                 eventsViewHolder.setView(Home.this, event.getDate().substring(0, 2), event.getTitle(), event.getFilename());
+                eventsViewHolder.setLisner();
             }
 
             @Override
@@ -121,6 +122,9 @@ public class Home extends AppCompatActivity {
         private View mView;
         private TextView date, month, title, content;
         private String filename;
+        private String Date;
+        private String Title;
+        private Context context;
 
         public EventsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,6 +137,10 @@ public class Home extends AppCompatActivity {
 
         public void setView(Context context, String date, String title, String filename){
             this.filename = filename;
+            this.Date = date;
+            this.Title = title;
+            this.context = context;
+
             this.date.setText(date);
             try {
                 Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(date);
@@ -149,13 +157,26 @@ public class Home extends AppCompatActivity {
                 StringBuilder builder = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null){
-                    builder.append(line);
+                    builder.append(line).append("\n");
                 }
                 String content = builder.toString();
                 this.content.setText(content);
             } catch (Exception e) {
                e.printStackTrace();
             }
+        }
+
+        public void setLisner(){
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ViewPost.class);
+                    intent.putExtra("filename", filename);
+                    intent.putExtra("date", Date);
+                    intent.putExtra("title", Title);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

@@ -1,6 +1,7 @@
 package com.hrishi_3331.devstudio3331.diary;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -24,6 +29,8 @@ public class New_Event extends AppCompatActivity {
     private DatabaseHelper mDatabaseHelper;
     private String mDate;
     private String time_;
+    private boolean update;
+    private String filename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +44,38 @@ public class New_Event extends AppCompatActivity {
         day_of_week_date = (TextView)findViewById(R.id.new_post_day);
         time = (TextView)findViewById(R.id.new_post_time);
 
+
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        java.util.Date date = calendar.getTime();
+        java.util.Date date;
+        Intent intent = getIntent();
+        update = intent.getBooleanExtra("update", false);
+
+        if (update){
+            String title = intent.getStringExtra("Title");
+            String Date = intent.getStringExtra("Date");
+            filename = intent.getStringExtra("Filename");
+
+            this.title.setText(title);
+            try {
+                FileInputStream inputStream = openFileInput(filename);
+                InputStreamReader reader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(reader);
+                StringBuilder builder = new StringBuilder();
+
+                String line ="";
+
+                while ((line = bufferedReader.readLine()) != null){
+                    builder.append(line).append("\n");
+                }
+
+                this.content.setText(builder.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        date = calendar.getTime();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         SimpleDateFormat day_date = new SimpleDateFormat("dd", Locale.getDefault());
         SimpleDateFormat time_date = new SimpleDateFormat("h:mm a", Locale.getDefault());
@@ -58,10 +95,15 @@ public class New_Event extends AppCompatActivity {
 
 
     public String generateFilename(String title, String date, String time){
-        String[] temps = date.split("/");
-        String[] temps2 = time.split(":");
-        String file = title + temps[0] + temps[1] + temps[2] + temps2[0] + temps2[1] + temps2[2];
-        return file + ".txt";
+        if (update){
+            return filename;
+        }
+        else {
+            String[] temps = date.split("/");
+            String[] temps2 = time.split(":");
+            String file = title + temps[0] + temps[1] + temps[2] + temps2[0] + temps2[1] + temps2[2];
+            return file + ".txt";
+        }
     }
 
     public void SaveFile(View view){
@@ -87,10 +129,14 @@ public class New_Event extends AppCompatActivity {
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
 
-            boolean res = mDatabaseHelper.AddData(Event_Title, FileName, mDate);
+            if (!update) {
+                boolean res = mDatabaseHelper.AddData(Event_Title, FileName, mDate);
 
-            if (!res){
-                Toast.makeText(this, "Error in saving file! Please try again", Toast.LENGTH_SHORT).show();
+                if (!res) {
+                    Toast.makeText(this, "Error in saving file! Please try again", Toast.LENGTH_SHORT).show();
+                } else {
+                    finish();
+                }
             }
             else {
                 finish();
