@@ -2,10 +2,6 @@ package com.hrishi_3331.devstudio3331.diary;
 
 import android.content.Context;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-
 public class Event {
 
     private String title;
