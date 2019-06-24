@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hrishi_3331.devstudio3331.diary">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -21,7 +22,10 @@
         <activity android:name=".SetPassword" />
         <activity android:name=".New_Event" />
         <activity android:name=".ViewPost" />
-        <activity android:name=".Info"></activity>
+        <activity android:name=".Info" />
+        <activity android:name=".Profile" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Privacy_Policy"></activity>
     </application>
 
 </manifest>
