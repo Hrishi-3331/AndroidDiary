@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -20,7 +20,8 @@
         <activity android:name=".Home" />
         <activity android:name=".SetPassword" />
         <activity android:name=".New_Event" />
-        <activity android:name=".ViewPost"></activity>
+        <activity android:name=".ViewPost" />
+        <activity android:name=".Info"></activity>
     </application>
 
 </manifest>

@@ -51,7 +51,9 @@ public class New_Event extends AppCompatActivity {
             String title = intent.getStringExtra("Title");
             String Date = intent.getStringExtra("Date");
             filename = intent.getStringExtra("Filename");
+            String time = intent.getStringExtra("Time");
 
+            this.time.setText(time);
             this.title.setText(title);
             try {
                 FileInputStream inputStream = openFileInput(filename);
@@ -66,26 +68,30 @@ public class New_Event extends AppCompatActivity {
                 }
 
                 this.content.setText(builder.toString());
+                date =  new SimpleDateFormat("dd/MM/yyyy").parse(Date);
+
             } catch (Exception e) {
                 e.printStackTrace();
+                date = null;
             }
-
+        }
+        else {
+            date = calendar.getTime();
+            SimpleDateFormat time_date = new SimpleDateFormat("h:mm a", Locale.getDefault());
+            time_ = new SimpleDateFormat("h:mm:ss").format(date);
+            this.time.setText(time_date.format(date));
         }
 
-        date = calendar.getTime();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         SimpleDateFormat day_date = new SimpleDateFormat("dd", Locale.getDefault());
-        SimpleDateFormat time_date = new SimpleDateFormat("h:mm a", Locale.getDefault());
         SimpleDateFormat month_date = new SimpleDateFormat("MMMM", Locale.getDefault());
         SimpleDateFormat year_date = new SimpleDateFormat("yyyy", Locale.getDefault());
         SimpleDateFormat day_of_week = new SimpleDateFormat("EEEE", Locale.getDefault());
         mDate = format.format(date);
-        time_ = new SimpleDateFormat("h:mm:ss").format(date);
 
         this.day_date.setText(day_date.format(date));
         this.month_date.setText(month_date.format(date) + " " + year_date.format(date));
         this.day_of_week_date.setText(day_of_week.format(date));
-        this.time.setText(time_date.format(date));
 
         mDatabaseHelper = new DatabaseHelper(New_Event.this);
     }
@@ -127,7 +133,7 @@ public class New_Event extends AppCompatActivity {
             }
 
             if (!update) {
-                boolean res = mDatabaseHelper.AddData(Event_Title, FileName, mDate);
+                boolean res = mDatabaseHelper.AddData(Event_Title, FileName, mDate, time.getText().toString());
 
                 if (!res) {
                     Toast.makeText(this, "Error in saving file! Please try again", Toast.LENGTH_SHORT).show();

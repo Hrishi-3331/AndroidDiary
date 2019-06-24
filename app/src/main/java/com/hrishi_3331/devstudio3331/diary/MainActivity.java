@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        LinearLayout anim = (LinearLayout)findViewById(R.id.anim);
+        anim.animate().scaleX(20).setDuration(2000).start();
 
         Handler handler = new Handler();
 
@@ -32,6 +36,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 1500);
     }
 }

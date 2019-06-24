@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -102,7 +103,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onBindViewHolder(@NonNull EventsViewHolder eventsViewHolder, int i) {
                 Event event = Events.get(i);
-                eventsViewHolder.setView(Home.this, event.getDate().substring(0, 2), event.getTitle(), event.getFilename());
+                eventsViewHolder.setView(Home.this, event.getDate(), event.getTitle(), event.getFilename(), event.getTime());
                 eventsViewHolder.setLisner();
             }
 
@@ -122,6 +123,7 @@ public class Home extends AppCompatActivity {
         private String filename;
         private String Date;
         private String Title;
+        private String Time;
         private Context context;
 
         public EventsViewHolder(@NonNull View itemView) {
@@ -133,16 +135,18 @@ public class Home extends AppCompatActivity {
             content = mView.findViewById(R.id.event_content);
         }
 
-        public void setView(Context context, String date, String title, String filename){
+        public void setView(Context context, String date, String title, String filename, String time){
+            this.Time = time;
             this.filename = filename;
             this.Date = date;
             this.Title = title;
             this.context = context;
 
-            this.date.setText(date);
             try {
                 Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(date);
                 String month1 = new SimpleDateFormat("MMMM").format(date1);
+                String temp = new SimpleDateFormat("dd").format(date1);
+                this.date.setText(temp);
                 this.month.setText(month1);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -171,6 +175,7 @@ public class Home extends AppCompatActivity {
                     Intent intent = new Intent(context, ViewPost.class);
                     intent.putExtra("filename", filename);
                     intent.putExtra("date", Date);
+                    intent.putExtra("time", Time);
                     intent.putExtra("title", Title);
                     context.startActivity(intent);
                 }
@@ -182,13 +187,18 @@ public class Home extends AppCompatActivity {
         Cursor data = helper.getEvents();
 
         while (data.moveToNext()){
-            Event event = new Event(Home.this, data.getString(1), data.getString(2), data.getString(3));
+            Event event = new Event(Home.this, data.getString(1), data.getString(2), data.getString(3), data.getString(4));
             Events.add(event);
         }
     }
 
     public void NewPost(View view){
         Intent intent = new Intent(Home.this, New_Event.class);
+        startActivity(intent);
+    }
+
+    public void Info(View view){
+        Intent intent = new Intent(Home.this, Info.class);
         startActivity(intent);
     }
 }

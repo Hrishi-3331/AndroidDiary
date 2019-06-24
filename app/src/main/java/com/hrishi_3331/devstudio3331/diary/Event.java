@@ -8,11 +8,13 @@ public class Event {
     private String filename;
     private String date;
     private String content;
+    private String time;
 
-    public Event(Context context, String title, String filename, String date) {
+    public Event(Context context, String title, String filename, String date, String time) {
         this.title = title;
         this.filename = filename;
         this.date = date;
+        this.time = time;
     }
 
     public String getTitle() {
@@ -45,5 +47,13 @@ public class Event {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

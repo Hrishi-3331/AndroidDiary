@@ -6,14 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/colorPrimary"
+    android:gravity="bottom"
+    android:background="@drawable/splash"
     >
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center" />
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
+        >
+
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="5dp"
+            android:background="@android:color/darker_gray"
+            >
+
+            <LinearLayout
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:id="@+id/anim"
+                android:background="@android:color/white"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>

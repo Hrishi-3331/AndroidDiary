@@ -62,7 +62,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="110dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="4dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:background="@drawable/dashboard"
@@ -256,6 +256,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:background="@android:color/transparent"
+                android:onClick="Info"
                 android:scaleType="fitXY"
                 android:src="@drawable/icons8_info"
                 android:tint="@color/colorPrimary" />

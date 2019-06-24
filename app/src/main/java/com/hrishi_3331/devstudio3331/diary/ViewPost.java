@@ -19,9 +19,11 @@ public class ViewPost extends AppCompatActivity {
     private String filename;
     private String date;
     private String title;
+    private String time;
     private DatabaseHelper helper;
     private TextView post_content;
     private TextView post_title;
+    private TextView post_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +35,16 @@ public class ViewPost extends AppCompatActivity {
         TextView post_date = (TextView) findViewById(R.id.post_date);
         TextView post_day = (TextView) findViewById(R.id.post_day);
         TextView post_month = (TextView) findViewById(R.id.post_month);
-        TextView post_time = (TextView) findViewById(R.id.post_time);
+        post_time = (TextView) findViewById(R.id.post_time);
 
         Intent intent = getIntent();
         filename = intent.getStringExtra("filename");
         date = intent.getStringExtra("date");
         title = intent.getStringExtra("title");
+        time = intent.getStringExtra("time");
 
         post_title.setText(title);
+        post_time.setText(time);
 
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy").parse(this.date);
@@ -49,7 +53,8 @@ public class ViewPost extends AppCompatActivity {
             String day = new SimpleDateFormat("EEEE").format(date);
             post_day.setText(day);
             String month = new SimpleDateFormat("MMMM").format(date);
-            post_month.setText(month);
+            String year = new SimpleDateFormat("yyyy").format(date);
+            post_month.setText(month + " " + year);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -121,7 +126,8 @@ public class ViewPost extends AppCompatActivity {
         intent.putExtra("Title", title)
                 .putExtra("Date", date)
                 .putExtra("Filename", filename)
-                .putExtra("update", true);
+                .putExtra("update", true)
+                .putExtra("Time", time);
         startActivity(intent);
         finish();
     }
