@@ -66,6 +66,18 @@ public class Home extends AppCompatActivity {
         cropImage();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView name = (TextView)findViewById(R.id.user_name);
+        SharedPreferences preferences = getSharedPreferences("mDiary", MODE_PRIVATE);
+        name.setText(preferences.getString("Name", "User"));
+        Avatar avatar = new Avatar();
+        userimage.setImageResource(avatar.getAvtar(preferences.getInt("Avtar", 0)));
+        cropImage();
+    }
+
+
     private void cropImage() {
         Drawable drawable = userimage.getDrawable();
         BitmapDrawable bitmapDrawable = (BitmapDrawable)drawable;
@@ -116,6 +128,13 @@ public class Home extends AppCompatActivity {
         };
 
         EventsView.setAdapter(adapter);
+
+        TextView name = (TextView)findViewById(R.id.user_name);
+        SharedPreferences preferences = getSharedPreferences("mDiary", MODE_PRIVATE);
+        name.setText(preferences.getString("Name", "User"));
+        Avatar avatar = new Avatar();
+        userimage.setImageResource(avatar.getAvtar(preferences.getInt("Avtar", 0)));
+        cropImage();
     }
 
     public static class EventsViewHolder extends RecyclerView.ViewHolder{
@@ -233,5 +252,9 @@ public class Home extends AppCompatActivity {
 
     public void Archive(View view){
         startActivity(new Intent(Home.this, Archive.class));
+    }
+
+    public void Account(View view){
+        startActivity(new Intent(Home.this, Profile.class));
     }
 }

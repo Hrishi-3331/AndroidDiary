@@ -181,6 +181,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:background="@android:color/transparent"
+                android:onClick="Account"
                 android:scaleType="fitXY"
                 android:src="@drawable/icons8_male_user"
                 android:tint="@color/colorPrimary" />
