@@ -206,6 +206,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:background="@android:color/transparent"
+                android:onClick="Archive"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_clipboard_text_black_24dp"
                 android:tint="@color/colorPrimary" />

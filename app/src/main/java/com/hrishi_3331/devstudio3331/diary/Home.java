@@ -230,4 +230,8 @@ public class Home extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void Archive(View view){
+        startActivity(new Intent(Home.this, Archive.class));
+    }
 }
