@@ -3,17 +3,16 @@ package com.hrishi_3331.devstudio3331.diary;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -29,6 +28,7 @@ public class Archive_View extends AppCompatActivity {
     private LinearLayoutManager manager;
     private ArrayList<Event> eventArrayList;
     private DatabaseHelper helper;
+    private LinearLayout nodata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class Archive_View extends AppCompatActivity {
         parse = intent.getStringExtra("parse");
 
         TextView header = (TextView)findViewById(R.id.header);
+        nodata = (LinearLayout)findViewById(R.id.nodata);
         header.setText(parse);
 
         events_view = (RecyclerView)findViewById(R.id.archive_events);
@@ -78,6 +79,9 @@ public class Archive_View extends AppCompatActivity {
         };
 
         events_view.setAdapter(adapter);
+        if (adapter.getItemCount() == 0){
+            nodata.setVisibility(View.VISIBLE);
+        }
     }
 
     public static class EventsViewHolder extends RecyclerView.ViewHolder{
