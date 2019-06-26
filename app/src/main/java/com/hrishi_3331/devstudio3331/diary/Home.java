@@ -22,8 +22,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -228,25 +232,31 @@ public class Home extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-        builder.setTitle("Exit Application?")
-                .setMessage("Do you want to exit app?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setCancelable(true);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Home.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View DialogLayout = inflater.inflate(R.layout.exit_dialog, null);
+        builder.setView(DialogLayout);
+
+        Button ok = (Button) DialogLayout.findViewById(R.id.btn_ok);
+        Button cancel = (Button) DialogLayout.findViewById(R.id.btn_cancel);
+
+        final android.app.AlertDialog exit_dialog = builder.create();
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exit_dialog.dismiss();
+            }
+        });
+
+        exit_dialog.show();
     }
 
     public void Archive(View view){

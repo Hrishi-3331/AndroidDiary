@@ -12,6 +12,15 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
+    <string name="default_content">\t\tWelcome to the diary app!
+
+        \n\n\tUse this app to write one or more short - notes during your day. Simply write a  few words about your workout session, events happened at school or in the office during the day. In weekends, you can write about all the fun you had meeting with friends, or being social with your family. You can use it as a Travel diary or Road journal that documents your journey. This app can also be used as daily activity log . You can make it your personal journal and have fun reading it over in few year, and share a few laughs with your friends.
+
+        \n\n\tThis app is pure textual, and contains no images or photos. Hence it runs fast and smooth on any Android device, and consumes minimal of available memory and disk-space!
+
+        \n\n\tDo share feedback, suggestions, complaints to us. We would love to hear from you! Please do rate this app on playstore! </string>
+
+    <string name="default_message">Welcome User</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>

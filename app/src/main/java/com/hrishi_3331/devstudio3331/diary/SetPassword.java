@@ -20,6 +20,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class SetPassword extends AppCompatActivity {
 
     private EditText username;
@@ -29,6 +35,7 @@ public class SetPassword extends AppCompatActivity {
     private int avtar_number;
     private ImageView user_image;
     private Avatar avatar;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,7 @@ public class SetPassword extends AppCompatActivity {
         cropImage();
 
         avatar = new Avatar();
+        databaseHelper = new DatabaseHelper(SetPassword.this);
     }
 
     private void cropImage() {
@@ -188,6 +196,22 @@ public class SetPassword extends AppCompatActivity {
         editor.putString("PIN", pin1);
         editor.putInt("Avtar", avtar_number);
         editor.commit();
+
+        try {
+            FileOutputStream outputStream = openFileOutput("Welcome.txt", MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+            writer.write(getResources().getString(R.string.default_content));
+            writer.close();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        java.util.Date date = calendar.getTime();
+        String time = new SimpleDateFormat("h:mm a").format(date);
+        String mDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        databaseHelper.AddData("Welcome User", "Welcome.txt", mDate, time);
 
         Intent intent = new Intent(SetPassword.this, Home.class);
         startActivity(intent);

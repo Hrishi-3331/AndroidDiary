@@ -125,10 +125,9 @@
                 </FrameLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/events_view"
-                    >
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                 </android.support.v7.widget.RecyclerView>
                 
@@ -191,6 +190,7 @@
                 android:layout_height="wrap_content"
                 android:padding="2dp"
                 android:text="My Account"
+                android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
@@ -217,6 +217,7 @@
                 android:layout_height="wrap_content"
                 android:padding="2dp"
                 android:text="Archive"
+                android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
@@ -243,6 +244,7 @@
                 android:layout_height="wrap_content"
                 android:padding="2dp"
                 android:text="Settings"
+                android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
@@ -269,6 +271,7 @@
                 android:layout_height="wrap_content"
                 android:padding="2dp"
                 android:text="Info"
+                android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
