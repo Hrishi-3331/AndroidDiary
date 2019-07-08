@@ -22,14 +22,14 @@ public class Privacy_Policy extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         mWeb.setWebViewClient(new MyAppWebViewClient());
 
-        mWeb.loadUrl("http://tronix2021.000webhostapp.com/");
+        mWeb.loadUrl("https://privacypolicyhost.firebaseapp.com/");
     }
 
     public class MyAppWebViewClient extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if(Uri.parse(url).getHost().endsWith("000webhost.com")) {
+            if(Uri.parse(url).getHost().endsWith("firebaseapp.com")) {
                 return false;
             }
 

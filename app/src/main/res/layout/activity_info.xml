@@ -15,30 +15,29 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
+        android:onClick="RateApp"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.897"
-        android:onClick="RateApp"
-        >
+        app:layout_constraintVertical_bias="0.723">
 
         <TextView
-            android:onClick="RateApp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="RateApp"
             android:text="@string/rate_our_app"
             android:textColor="@android:color/background_light"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:onClick="RateApp"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:onClick="RateApp"
             android:src="@drawable/fivestar" />
 
     </LinearLayout>

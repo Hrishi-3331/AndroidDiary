@@ -183,7 +183,7 @@ public class Home extends AppCompatActivity {
                 StringBuilder builder = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null){
-                    builder.append(line).append("\n");
+                    builder.append(line);
                 }
                 String content = builder.toString();
                 this.content.setText(content);
